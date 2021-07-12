@@ -1,0 +1,22 @@
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/lennykio/repositories/lennykiokogh"
+PassengerBaseURI "/"
+PassengerPython "/home/lennykio/virtualenv/repositories/lennykiokogh/3.8/bin/python3.8"
+PassengerAppLogFile "/home/lennykio/logs/django5"
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+SetEnv DEBUG False
+SetEnv SECRET_KEY @s*1b_&6%nz=9ep2*f8*uo*f7m^a0j4^a-0oto=rfdq+o25+55
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php74” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php74 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
