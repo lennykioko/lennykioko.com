@@ -156,7 +156,7 @@ export default function ProjectCardWithDialog({
               />
             </div>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[450px]">
+          <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[450px]">
             <DialogHeader>
               <DialogTitle>Download {title}</DialogTitle>
               <DialogDescription>
@@ -222,7 +222,7 @@ export default function ProjectCardWithDialog({
                 <span>View Download</span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[450px]">
+            <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[450px]">
               <DialogHeader>
                 <DialogTitle>Download {title}</DialogTitle>
                 <DialogDescription>

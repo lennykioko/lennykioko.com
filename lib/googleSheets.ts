@@ -74,8 +74,9 @@ export class GoogleSheetsService {
         `${result.data.updates?.updatedRows} row(s) added to Google Sheets`
       );
       return true;
-    } catch (error: any) {
-      console.error("Error saving to Google Sheets:", error?.message || error);
+    } catch (err) {
+      const error = err as { message?: string; response?: { status?: number } };
+      console.error("Error saving to Google Sheets:", error?.message || err);
       if (error?.response?.status === 403) {
         console.error(
           "Permission denied. Make sure the service account has Editor access to the sheet."
@@ -108,8 +109,9 @@ export class GoogleSheetsService {
           },
         });
       }
-    } catch (error: any) {
-      console.error("Error ensuring headers:", error?.message || error);
+    } catch (err) {
+      const error = err as { message?: string };
+      console.error("Error ensuring headers:", error?.message || err);
     }
   }
 
@@ -129,8 +131,9 @@ export class GoogleSheetsService {
       );
 
       return !!sheetExists;
-    } catch (error: any) {
-      console.error("Error verifying sheet access:", error?.message || error);
+    } catch (err) {
+      const error = err as { message?: string };
+      console.error("Error verifying sheet access:", error?.message || err);
       return false;
     }
   }
@@ -146,8 +149,9 @@ export class GoogleSheetsService {
           (sheet) => sheet.properties?.title || "Unknown"
         ) || []
       );
-    } catch (error: any) {
-      console.error("Error listing sheets:", error?.message || error);
+    } catch (err) {
+      const error = err as { message?: string };
+      console.error("Error listing sheets:", error?.message || err);
       return [];
     }
   }

@@ -24,9 +24,9 @@ export default function BlogListContent() {
   );
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="mx-auto max-w-4xl px-6 py-16">
+      <main className="mx-auto w-full max-w-4xl grow px-6 py-16">
         <div className="mb-12 flex items-start justify-between">
           <div>
             <h1 className="mb-4 text-3xl font-bold text-foreground">Blog</h1>
@@ -124,6 +124,6 @@ export default function BlogListContent() {
         )}
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -263,10 +263,11 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
                     {tag}
                     <button
                       type="button"
+                      aria-label={`Remove tag ${tag}`}
                       onClick={() => removeTag(tag)}
-                      className="ml-0.5 rounded-full hover:bg-muted"
+                      className="ml-0.5 inline-flex h-8 w-8 items-center justify-center rounded-full hover:bg-muted"
                     >
-                      <X className="h-3 w-3" />
+                      <X className="h-4 w-4" />
                     </button>
                   </Badge>
                 ))}

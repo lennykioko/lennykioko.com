@@ -43,7 +43,7 @@ export default function ProjectCard({
           <Button variant="outline" className="w-full justify-start" asChild>
             <Link
               href={url}
-              className="flex items-center space-x-2 h-4 w-4"
+              className="flex w-full items-center justify-center"
               {...linkProps}
             >
               <span>Learn More</span>

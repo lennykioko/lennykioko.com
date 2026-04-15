@@ -80,9 +80,9 @@ export default function BlogPostContent({
 
   if (post === undefined) {
     return (
-      <>
+      <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="mx-auto max-w-3xl px-6 py-16">
+        <main className="mx-auto w-full max-w-3xl grow px-6 py-16">
           <div className="animate-pulse">
             <div className="mb-8 h-4 w-24 rounded bg-muted" />
             <div className="mb-4 flex gap-2">
@@ -99,15 +99,15 @@ export default function BlogPostContent({
           </div>
         </main>
         <Footer />
-      </>
+      </div>
     );
   }
 
   if (!post) {
     return (
-      <>
+      <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="mx-auto max-w-3xl px-6 py-16 text-center">
+        <main className="mx-auto w-full max-w-3xl grow px-6 py-16 text-center">
           <h1 className="mb-4 text-2xl font-bold text-foreground">
             Post not found
           </h1>
@@ -119,15 +119,15 @@ export default function BlogPostContent({
           </Button>
         </main>
         <Footer />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <BlogPostJsonLd post={post} slug={slug} />
       <Header />
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="mx-auto w-full max-w-3xl grow px-6 py-16">
         <div className="mb-8 flex items-center justify-between">
           <Link
             href="/blog"
@@ -193,6 +193,6 @@ export default function BlogPostContent({
         />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

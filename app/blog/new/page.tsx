@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -10,31 +11,32 @@ import Footer from "@/components/Footer";
 export default function NewBlogPostPage() {
   const router = useRouter();
   const approvalStatus = useQuery(api.admins.getMyApprovalStatus);
+  const denied =
+    approvalStatus !== undefined && !approvalStatus?.isSuperAdmin;
 
-  if (approvalStatus === undefined) {
+  useEffect(() => {
+    if (denied) router.replace("/blog");
+  }, [denied, router]);
+
+  if (approvalStatus === undefined || denied) {
     return (
-      <>
+      <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="mx-auto max-w-4xl px-6 py-16">
+        <main className="mx-auto w-full max-w-4xl grow px-6 py-16">
           <p className="text-muted-foreground">Loading...</p>
         </main>
         <Footer />
-      </>
+      </div>
     );
   }
 
-  if (!approvalStatus?.isSuperAdmin) {
-    router.replace("/blog");
-    return null;
-  }
-
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main>
+      <main className="grow">
         <BlogForm mode="create" />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

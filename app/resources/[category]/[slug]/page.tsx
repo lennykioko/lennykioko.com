@@ -1,5 +1,6 @@
 import { resourcesData } from "@/lib/resourcesData";
 import { notFound } from "next/navigation";
+import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -98,7 +99,9 @@ export default async function ResourcePage({ params }: PageProps) {
 
             <div
               className="prose prose-slate max-w-none text-slate-700 space-y-4"
-              dangerouslySetInnerHTML={{ __html: data.description }}
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(data.description),
+              }}
             />
 
             <div className="mt-10 pt-6 border-t border-slate-100 flex justify-end">

@@ -63,7 +63,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full flex-col items-center justify-center bg-slate-100 p-8">
+    <footer className="w-full flex-col items-center justify-center bg-slate-100 p-6 sm:p-8">
       <div className="max-w-4xl mx-auto text-center space-y-6">
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Lenny Kioko</h3>
@@ -72,7 +72,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <nav className="flex items-center justify-center space-x-6">
+        <nav className="flex flex-wrap items-center justify-center gap-x-1 sm:gap-y-2">
           {socialLinks.map(({ href, icon: Icon, label, color }) => (
             <a
               key={label}
@@ -80,7 +80,7 @@ export default function Footer() {
               href={href}
               rel="noreferrer"
               aria-label={label}
-              className={`transition-transform hover:scale-110 ${color}`}
+              className={`flex h-11 w-11 items-center justify-center transition-transform hover:scale-110 ${color}`}
             >
               <Icon className="h-6 w-6" />
             </a>

@@ -131,7 +131,7 @@ export default function ResourceAction({
           Get Resource
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[450px]">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[450px]">
         <DialogHeader>
           <DialogTitle>
             {isPaid ? "Begin Purchase" : "Download Resource"}

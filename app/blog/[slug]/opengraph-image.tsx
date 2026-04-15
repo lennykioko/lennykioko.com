@@ -6,6 +6,13 @@ export const alt = "Lenny Kioko Blog";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+async function fetchPost(slug: string) {
+  const url = process.env.NEXT_PUBLIC_CONVEX_URL;
+  if (!url) return null;
+  const convex = new ConvexHttpClient(url);
+  return await convex.query(api.blog.getBySlug, { slug });
+}
+
 export default async function Image({
   params,
 }: {
@@ -13,10 +20,12 @@ export default async function Image({
 }) {
   const { slug } = await params;
 
-  const convex = new ConvexHttpClient(
-    process.env.NEXT_PUBLIC_CONVEX_URL as string,
-  );
-  const post = await convex.query(api.blog.getBySlug, { slug });
+  let post: Awaited<ReturnType<typeof fetchPost>> = null;
+  try {
+    post = await fetchPost(slug);
+  } catch (err) {
+    console.error("OG image: failed to load post", err);
+  }
 
   const title = post?.title ?? "Lenny Kioko Blog";
   const author = post?.author;

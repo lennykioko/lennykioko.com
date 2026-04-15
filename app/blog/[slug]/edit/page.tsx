@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { use, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
@@ -17,28 +17,29 @@ export default function EditBlogPostPage({
   const router = useRouter();
   const approvalStatus = useQuery(api.admins.getMyApprovalStatus);
   const post = useQuery(api.blog.getBySlug, { slug });
+  const loading = approvalStatus === undefined || post === undefined;
+  const denied = !loading && (!approvalStatus?.isSuperAdmin || !post);
 
-  if (approvalStatus === undefined || post === undefined) {
+  useEffect(() => {
+    if (denied) router.replace("/blog");
+  }, [denied, router]);
+
+  if (loading || denied || !post) {
     return (
-      <>
+      <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="mx-auto max-w-4xl px-6 py-16">
+        <main className="mx-auto w-full max-w-4xl grow px-6 py-16">
           <p className="text-muted-foreground">Loading...</p>
         </main>
         <Footer />
-      </>
+      </div>
     );
   }
 
-  if (!approvalStatus?.isSuperAdmin || !post) {
-    router.replace("/blog");
-    return null;
-  }
-
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main>
+      <main className="grow">
         <BlogForm
           mode="edit"
           initialData={{
@@ -55,6 +56,6 @@ export default function EditBlogPostPage({
         />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
