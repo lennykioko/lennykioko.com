@@ -52,7 +52,7 @@ const socialLinks = [
     color: "text-black",
   },
   {
-    href: "mailto:pacentaconsultancy@gmail.com",
+    href: "mailto:lenny@certitudeconsultancy.agency",
     icon: GrMailOption,
     label: "Email",
     color: "text-gray-600",

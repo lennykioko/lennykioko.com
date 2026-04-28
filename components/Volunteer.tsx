@@ -18,6 +18,13 @@ const volunteering: VolunteerItem[] = [
   },
   {
     image: "/rotaract.jpg",
+    title: "International Service Director",
+    subTitle: "Rotaract",
+    date: "Jun 2026 - Jun 2027",
+    description: "Economic Empowerment",
+  },
+  {
+    image: "/rotaract.jpg",
     title: "The Rotary Foundation Director",
     subTitle: "Rotaract",
     date: "Jun 2023 - Jun 2024",

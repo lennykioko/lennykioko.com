@@ -10,10 +10,10 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    image: "/cityzen.jpg",
-    title: "Software Engineer",
-    subTitle: "Financial Technology",
-    date: "June 2019 - Present",
+    image: "/certitude.jpg",
+    title: "Co-founder & CEO",
+    subTitle: "Certitude Consultancy - Full-time",
+    date: "Sep 2025 - Present",
     description: "Nairobi, Kenya",
   },
   {

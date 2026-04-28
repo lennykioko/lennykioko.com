@@ -11,6 +11,11 @@ const resourceSections = [
         title: "KweliVote",
         url: "https://kwelivote.com",
       },
+      {
+        image: "/CertyPay.png",
+        title: "CertyPay",
+        url: "https://www.certypay.app",
+      },
     ],
   },
 ];

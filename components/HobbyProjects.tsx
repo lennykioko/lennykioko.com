@@ -11,6 +11,11 @@ const projects: Project[] = [
     title: "Bible In a Year",
     url: "https://bible-in-a-year.vercel.app/",
   },
+  {
+    image: "/saintjoseph.png",
+    title: "St. Joseph Consecration Tracker",
+    url: "https://saintjoseph-33.vercel.app/",
+  },
 ];
 
 export default function HobbyProjects() {
