@@ -21,6 +21,7 @@ export async function generateMetadata({
     title: string;
     description: string;
     author: string;
+    coverImageUrl?: string;
     publishedAt?: number;
     createdAt: number;
   } | null = null;
@@ -38,6 +39,8 @@ export async function generateMetadata({
     };
   }
 
+  const ogImages = post.coverImageUrl ? [post.coverImageUrl] : undefined;
+
   return {
     title: post.title,
     description: post.description,
@@ -50,11 +53,13 @@ export async function generateMetadata({
         post.publishedAt ?? post.createdAt,
       ).toISOString(),
       authors: [post.author],
+      ...(ogImages ? { images: ogImages } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      ...(ogImages ? { images: ogImages } : {}),
     },
     alternates: {
       canonical: `${siteUrl}/blog/${slug}`,

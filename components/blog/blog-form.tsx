@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -12,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, X } from "lucide-react";
+import { ArrowLeft, ImageIcon, X } from "lucide-react";
 import Link from "next/link";
 
 const DEFAULT_AUTHOR = "Lenny Kioko";
@@ -36,6 +37,8 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
   const router = useRouter();
   const createPost = useMutation(api.blog.create);
   const updatePost = useMutation(api.blog.update);
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+  const getImageUrl = useMutation(api.files.getImageUrl);
 
   const [title, setTitle] = useState(initialData?.title ?? "");
   const [slug, setSlug] = useState(initialData?.slug ?? "");
@@ -43,12 +46,49 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
     initialData?.description ?? "",
   );
   const [content, setContent] = useState(initialData?.content ?? "");
+  const [coverImageUrl, setCoverImageUrl] = useState(
+    initialData?.coverImageUrl ?? "",
+  );
+  const [uploadingCover, setUploadingCover] = useState(false);
   const [tags, setTags] = useState<string[]>(initialData?.tags ?? []);
   const [tagInput, setTagInput] = useState("");
   const [author, setAuthor] = useState(initialData?.author ?? DEFAULT_AUTHOR);
   const [published, setPublished] = useState(initialData?.published ?? false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const coverInputRef = useRef<HTMLInputElement>(null);
+
+  const handleCoverUpload = async (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      setError("Only image files are allowed.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Cover image must be under 5MB.");
+      return;
+    }
+
+    setUploadingCover(true);
+    setError("");
+    try {
+      const uploadUrl = await generateUploadUrl();
+      const result = await fetch(uploadUrl, {
+        method: "POST",
+        headers: { "Content-Type": file.type },
+        body: file,
+      });
+      if (!result.ok) throw new Error(`Upload failed (${result.status})`);
+      const { storageId } = await result.json();
+      const url = await getImageUrl({ storageId });
+      if (url) setCoverImageUrl(url);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to upload cover image.",
+      );
+    } finally {
+      setUploadingCover(false);
+    }
+  };
 
   const generateSlug = (text: string) => {
     return text
@@ -115,6 +155,7 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
           title: title.trim(),
           description: description.trim(),
           content,
+          coverImageUrl: coverImageUrl || undefined,
           tags,
           author: author.trim() || DEFAULT_AUTHOR,
           published,
@@ -126,6 +167,7 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
           title: title.trim(),
           description: description.trim(),
           content,
+          coverImageUrl: coverImageUrl || "",
           tags,
           author: author.trim() || DEFAULT_AUTHOR,
           published,
@@ -220,6 +262,62 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
             placeholder="Brief description for SEO and post cards"
             rows={2}
           />
+        </div>
+
+        <div>
+          <Label className="mb-1.5 block text-sm font-medium">
+            Cover Image
+          </Label>
+          <input
+            ref={coverInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) handleCoverUpload(file);
+              e.target.value = "";
+            }}
+          />
+          {coverImageUrl ? (
+            <div className="relative overflow-hidden rounded-lg border border-border">
+              <Image
+                src={coverImageUrl}
+                alt="Cover preview"
+                width={896}
+                height={400}
+                className="h-48 w-full object-cover"
+              />
+              <div className="absolute right-2 top-2 flex gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => coverInputRef.current?.click()}
+                  disabled={uploadingCover}
+                  className="rounded-md bg-background/90 px-2.5 py-1 text-xs font-medium text-foreground shadow-sm backdrop-blur transition-colors hover:bg-background disabled:opacity-50"
+                >
+                  {uploadingCover ? "Uploading…" : "Replace"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCoverImageUrl("")}
+                  aria-label="Remove cover image"
+                  className="rounded-md bg-background/90 p-1 text-muted-foreground shadow-sm backdrop-blur transition-colors hover:bg-background hover:text-destructive"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => coverInputRef.current?.click()}
+              disabled={uploadingCover}
+              className="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border py-10 text-sm text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground disabled:opacity-50"
+            >
+              <ImageIcon className="h-5 w-5" />
+              {uploadingCover ? "Uploading…" : "Click to upload a cover image"}
+            </button>
+          )}
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
