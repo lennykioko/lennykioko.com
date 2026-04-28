@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "convex:dev": "bunx convex dev",
-    "build": "next build",
+    "build:dev": "next build",
+    "build": "bunx convex deploy --cmd 'next build'",
     "start": "next start",
     "lint": "eslint",
     "format": "npx prettier --write .",
