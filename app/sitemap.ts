@@ -5,6 +5,8 @@ import { api } from "../convex/_generated/api";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL_SEO || "https://lennykioko.com";
 
+export const revalidate = 43200; // 12 hours
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = [
     { url: siteUrl, changeFrequency: "monthly", priority: 1 },
