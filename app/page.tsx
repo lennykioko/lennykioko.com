@@ -9,16 +9,16 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://lennykioko.com"),
   title: "Lenny Kioko",
   description:
-    "Software Engineer & Financial Technology specialist based in Nairobi, Kenya",
+    "Tech Consultant helping businesses save time and grow revenue using simple, practical technology — custom software, automation, and AI where it pays off. Based in Nairobi, Kenya.",
   keywords:
-    "Software Engineer, Financial Technology, FinTech, React, Next.js, React Native, TypeScript, Python, Pine Script, MetaTrader, TradingView, Stocks, Shares, Mentor, Coach, Consultant, Techie, Nairobi, Kenya",
+    "Tech Consultant, Software Consultant, Custom Software, Business Automation, AI, FinTech, Internal Tools, React, Next.js, React Native, TypeScript, Python, Pine Script, MetaTrader, TradingView, Mentor, Coach, Consultant, Techie, Nairobi, Kenya",
   openGraph: {
     images: [
       {
-        url: "/cityzen.jpg",
-        width: 1024,
-        height: 1024,
-        alt: "Lenny Kioko Profile",
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Lenny Kioko — Tech Consultant",
       },
     ],
   },

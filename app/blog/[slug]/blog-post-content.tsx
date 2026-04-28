@@ -1,6 +1,7 @@
 "use client";
 
 import { use } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
 import { useQuery } from "convex/react";
@@ -27,6 +28,7 @@ function BlogPostJsonLd({
     description: string;
     author: string;
     content: string;
+    coverImageUrl?: string;
     publishedAt?: number;
     createdAt: number;
   };
@@ -41,6 +43,7 @@ function BlogPostJsonLd({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
+    ...(post.coverImageUrl ? { image: post.coverImageUrl } : {}),
     datePublished: new Date(
       post.publishedAt ?? post.createdAt,
     ).toISOString(),
@@ -184,6 +187,19 @@ export default function BlogPostContent({
             </span>
           </div>
         </header>
+
+        {post.coverImageUrl && (
+          <div className="mb-10 overflow-hidden rounded-xl">
+            <Image
+              src={post.coverImageUrl}
+              alt={post.title}
+              width={1200}
+              height={630}
+              className="w-full object-cover"
+              priority
+            />
+          </div>
+        )}
 
         <article
           className="prose prose-slate max-w-none prose-headings:font-bold prose-a:text-amber-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg"

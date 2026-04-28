@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "convex:dev": "bunx convex dev",
+    "build:dev": "next build",
+    "build": "bunx convex deploy --cmd 'next build'",
     "start": "next start",
     "lint": "eslint",
     "format": "npx prettier --write .",
