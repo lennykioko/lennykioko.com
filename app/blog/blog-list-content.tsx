@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -31,7 +32,7 @@ export default function BlogListContent() {
           <div>
             <h1 className="mb-4 text-3xl font-bold text-foreground">Blog</h1>
             <p className="text-lg text-muted-foreground">
-              Notes on software engineering, financial technology, and trading.
+              Notes on technology, fintech, leadership and personal reflections.
             </p>
           </div>
           {isSuperAdmin && (
@@ -68,18 +69,28 @@ export default function BlogListContent() {
             {posts.map((post) => (
               <div
                 key={post._id}
-                className="group relative rounded-xl border border-border p-6 transition-shadow hover:shadow-md"
+                className="group relative overflow-hidden rounded-xl border border-border transition-shadow hover:shadow-md"
               >
                 {isSuperAdmin && (
                   <Link
                     href={`/blog/${post.slug}/edit`}
-                    className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground opacity-0 transition-opacity hover:bg-muted group-hover:opacity-100"
+                    className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-md bg-background/80 text-muted-foreground opacity-0 backdrop-blur transition-opacity hover:bg-background group-hover:opacity-100"
                     title="Edit post"
                   >
                     <Pencil className="h-4 w-4" />
                   </Link>
                 )}
                 <Link href={`/blog/${post.slug}`}>
+                  {post.coverImageUrl && (
+                    <Image
+                      src={post.coverImageUrl}
+                      alt=""
+                      width={600}
+                      height={300}
+                      className="h-44 w-full object-cover"
+                    />
+                  )}
+                  <div className="p-6">
                   <div className="mb-3 flex flex-wrap items-center gap-2">
                     {!post.published && (
                       <Badge
@@ -116,6 +127,7 @@ export default function BlogListContent() {
                       <Clock className="h-3.5 w-3.5" />
                       {estimateReadingTime(post.content)}
                     </span>
+                  </div>
                   </div>
                 </Link>
               </div>
