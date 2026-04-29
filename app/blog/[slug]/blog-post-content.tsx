@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
@@ -10,6 +10,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ImageLightbox } from "@/components/blog/image-lightbox";
 import { Calendar, Clock, ArrowLeft, Pencil } from "lucide-react";
 
 function estimateReadingTime(html: string): string {
@@ -80,6 +81,24 @@ export default function BlogPostContent({
   const post = useQuery(api.blog.getBySlug, { slug });
   const approvalStatus = useQuery(api.admins.getMyApprovalStatus);
   const isSuperAdmin = approvalStatus?.isSuperAdmin ?? false;
+  const articleRef = useRef<HTMLElement | null>(null);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const node = articleRef.current;
+    if (!node) return;
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const img = target?.closest("img");
+      if (!img || !node.contains(img)) return;
+      e.preventDefault();
+      setLightbox({ src: img.src, alt: img.alt || "" });
+    };
+    node.addEventListener("click", onClick);
+    return () => node.removeEventListener("click", onClick);
+  }, [post?.content]);
 
   if (post === undefined) {
     return (
@@ -189,25 +208,43 @@ export default function BlogPostContent({
         </header>
 
         {post.coverImageUrl && (
-          <div className="mb-10 overflow-hidden rounded-xl">
+          <button
+            type="button"
+            onClick={() =>
+              setLightbox({
+                src: post.coverImageUrl as string,
+                alt: post.title,
+              })
+            }
+            aria-label="Open cover image"
+            className="-mx-6 mb-10 block w-[calc(100%+3rem)] overflow-hidden sm:mx-0 sm:w-full sm:rounded-xl"
+          >
             <Image
               src={post.coverImageUrl}
               alt={post.title}
               width={1200}
               height={630}
-              className="w-full object-cover"
+              className="w-full cursor-zoom-in object-cover"
               priority
             />
-          </div>
+          </button>
         )}
 
         <article
-          className="prose prose-slate max-w-none prose-headings:font-bold prose-a:text-amber-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg"
+          ref={articleRef}
+          className="prose prose-slate max-w-none prose-headings:font-bold prose-a:text-amber-600 prose-a:no-underline hover:prose-a:underline prose-img:cursor-zoom-in prose-img:rounded-lg [&_img]:-mx-6 [&_img]:w-[calc(100%+3rem)] [&_img]:max-w-none sm:[&_img]:mx-0 sm:[&_img]:w-auto sm:[&_img]:max-w-full"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(post.content),
           }}
         />
       </main>
+      {lightbox && (
+        <ImageLightbox
+          src={lightbox.src}
+          alt={lightbox.alt}
+          onClose={() => setLightbox(null)}
+        />
+      )}
       <Footer />
     </div>
   );
