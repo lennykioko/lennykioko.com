@@ -265,9 +265,12 @@ export function BlogForm({ mode, initialData }: BlogFormProps) {
         </div>
 
         <div>
-          <Label className="mb-1.5 block text-sm font-medium">
-            Cover Image
-          </Label>
+          <div className="mb-1.5 flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1">
+            <Label className="block text-sm font-medium">Cover Image</Label>
+            <span className="text-xs text-muted-foreground">
+              Recommended: 1200×630 (max 5MB)
+            </span>
+          </div>
           <input
             ref={coverInputRef}
             type="file"
