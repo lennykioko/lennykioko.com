@@ -84,7 +84,7 @@ export default function BlogListContent() {
                   {post.coverImageUrl && (
                     <Image
                       src={post.coverImageUrl}
-                      alt=""
+                      alt={post.title}
                       width={600}
                       height={300}
                       className="h-44 w-full object-cover"

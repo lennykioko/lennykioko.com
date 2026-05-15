@@ -5,14 +5,22 @@ import Header from "../../components/Header";
 import Jumbotron from "../../components/Jumbotron";
 import Skills from "../../components/Skills";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL_SEO || "https://lennykioko.com";
+
+const title = "Career";
+const description =
+  "Professional experience and career journey of Lenny Kioko — Tech Consultant helping businesses save time and grow revenue with simple, practical technology. Based in Nairobi, Kenya.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lennykioko.com"),
-  title: "Career - Lenny Kioko",
-  description:
-    "Professional experience and career journey of Lenny Kioko — Tech Consultant helping businesses save time and grow revenue with simple, practical technology. Based in Nairobi, Kenya.",
-  keywords:
-    "Career, Experience, Professional, Tech Consultant, Software Consultant, Custom Software, Business Automation, AI, FinTech, Algorithmic Trading, Trader, ICT trader, Inner Circle Trader, Forex, Mentor, Coach, Consultant, Techie, Nairobi, Kenya",
+  title,
+  description,
+  alternates: { canonical: `${siteUrl}/career` },
   openGraph: {
+    type: "profile",
+    url: `${siteUrl}/career`,
+    title: `${title} | Lenny Kioko`,
+    description,
     images: [
       {
         url: "/og-image.png",
@@ -21,6 +29,12 @@ export const metadata: Metadata = {
         alt: "Lenny Kioko — Tech Consultant",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${title} | Lenny Kioko`,
+    description,
+    images: ["/og-image.png"],
   },
 };
 

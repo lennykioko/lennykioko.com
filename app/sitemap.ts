@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../convex/_generated/api";
+import { resourcesData } from "@/lib/resourcesData";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL_SEO || "https://lennykioko.com";
@@ -8,13 +9,24 @@ const siteUrl =
 export const revalidate = 43200; // 12 hours
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const now = new Date();
+
   const staticEntries: MetadataRoute.Sitemap = [
-    { url: siteUrl, changeFrequency: "monthly", priority: 1 },
-    { url: `${siteUrl}/career`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${siteUrl}/trading`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${siteUrl}/hobbies`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${siteUrl}/blog`, changeFrequency: "weekly", priority: 0.9 },
+    { url: siteUrl, lastModified: now, changeFrequency: "monthly", priority: 1 },
+    { url: `${siteUrl}/career`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/trading`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/hobbies`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${siteUrl}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
   ];
+
+  const resourceEntries: MetadataRoute.Sitemap = Object.entries(
+    resourcesData,
+  ).map(([slug, data]) => ({
+    url: `${siteUrl}/resources/${data.category}/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
 
   let postEntries: MetadataRoute.Sitemap = [];
   try {
@@ -32,5 +44,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Convex unreachable — fall back to static entries only
   }
 
-  return [...staticEntries, ...postEntries];
+  return [...staticEntries, ...resourceEntries, ...postEntries];
 }

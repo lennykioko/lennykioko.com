@@ -6,14 +6,22 @@ import Jumbotron from "../../components/Jumbotron";
 import TradingResources from "../../components/TradingResources";
 import Skills from "../../components/Skills";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL_SEO || "https://lennykioko.com";
+
+const title = "Trading";
+const description =
+  "Trading notes, tools and resources from Lenny Kioko — Tech Consultant and trader. Algorithmic trading, MetaTrader, Pine Script and FinTech. Based in Nairobi, Kenya.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lennykioko.com"),
-  title: "Lenny Kioko | Trading",
-  description:
-    "Trading notes, tools and resources from Lenny Kioko — Tech Consultant and trader. Algorithmic trading, MetaTrader, Pine Script and FinTech. Based in Nairobi, Kenya.",
-  keywords:
-    "Tech Consultant, FinTech, Algorithmic Trading, Pine Script, MetaTrader, TradingView, Stocks, Shares, Trading, Forex, Nairobi, Kenya",
+  title,
+  description,
+  alternates: { canonical: `${siteUrl}/trading` },
   openGraph: {
+    type: "website",
+    url: `${siteUrl}/trading`,
+    title: `${title} | Lenny Kioko`,
+    description,
     images: [
       {
         url: "/og-image.png",
@@ -22,6 +30,12 @@ export const metadata: Metadata = {
         alt: "Lenny Kioko — Tech Consultant",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${title} | Lenny Kioko`,
+    description,
+    images: ["/og-image.png"],
   },
 };
 

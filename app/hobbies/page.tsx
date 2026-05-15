@@ -6,14 +6,22 @@ import HobbyProjects from "../../components/HobbyProjects";
 import Skills from "../../components/Skills";
 import Volunteer from "../../components/Volunteer";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL_SEO || "https://lennykioko.com";
+
+const title = "Personal";
+const description =
+  "Personal projects, volunteer work and hobbies of Lenny Kioko — Tech Consultant based in Nairobi, Kenya. Helping businesses save time and grow revenue with simple, practical technology.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lennykioko.com"),
-  title: "Personal - Lenny Kioko",
-  description:
-    "Personal projects, volunteer work and hobbies of Lenny Kioko — Tech Consultant based in Nairobi, Kenya. Helping businesses save time and grow revenue with simple, practical technology.",
-  keywords:
-    "Personal, Volunteer, Hobby, Projects, Community, Open Source, Tech Consultant, Software Consultant, Custom Software, Business Automation, AI, FinTech, Algorithmic Trading, Trader, Mentor, Coach, Consultant, Techie, Nairobi, Kenya",
+  title,
+  description,
+  alternates: { canonical: `${siteUrl}/hobbies` },
   openGraph: {
+    type: "website",
+    url: `${siteUrl}/hobbies`,
+    title: `${title} | Lenny Kioko`,
+    description,
     images: [
       {
         url: "/og-image.png",
@@ -22,6 +30,12 @@ export const metadata: Metadata = {
         alt: "Lenny Kioko — Tech Consultant",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${title} | Lenny Kioko`,
+    description,
+    images: ["/og-image.png"],
   },
 };
 

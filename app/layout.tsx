@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { jsonLd } from "@/lib/sanitize";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -62,7 +63,43 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: { canonical: siteUrl },
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Lenny Kioko",
+  url: siteUrl,
+  image: `${siteUrl}/cityzen.jpg`,
+  jobTitle: "Tech Consultant",
+  description: siteDescription,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Nairobi",
+    addressCountry: "KE",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/lennykioko/",
+    "https://github.com/lennykioko",
+    "https://x.com/lenny_kioko",
+    "https://www.youtube.com/@TradesbyLennyKioko/",
+    "https://www.instagram.com/lenny_kioko/",
+    "https://t.me/TradesbyLennyKioko/",
+    "https://www.tiktok.com/@lenny_kioko",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Lenny Kioko",
+  url: siteUrl,
+  inLanguage: "en",
+  publisher: {
+    "@type": "Person",
+    name: "Lenny Kioko",
+    url: siteUrl,
+  },
 };
 
 export const viewport: Viewport = {
@@ -79,6 +116,14 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(websiteSchema) }}
+        />
         <script
           defer
           src="https://cloud.umami.is/script.js"

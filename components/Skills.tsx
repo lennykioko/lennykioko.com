@@ -23,7 +23,7 @@ const skillCategories = [
 export default function Skills() {
   return (
     <section className="w-full flex-col items-center justify-center border-b-2 border-amber-400 bg-slate-100 py-8">
-      <div className="p-4 text-center text-2xl font-semibold">Skills</div>
+      <h2 className="p-4 text-center text-2xl font-semibold">Skills</h2>
 
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

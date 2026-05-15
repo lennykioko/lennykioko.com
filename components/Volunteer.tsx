@@ -84,9 +84,9 @@ const volunteering: VolunteerItem[] = [
 export default function Volunteer() {
   return (
     <section className="flex-col items-center justify-center border-b-2 border-amber-400 py-8">
-      <div className="p-4 text-center text-2xl font-semibold">
+      <h2 className="p-4 text-center text-2xl font-semibold">
         Volunteering &amp; Hobbies
-      </div>
+      </h2>
       <div className="max-w-4xl mx-auto px-4">
         <div className="space-y-4">
           {volunteering.map((volunteer, idx) => (

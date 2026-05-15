@@ -1,13 +1,17 @@
 import { resourcesData } from "@/lib/resourcesData";
 import { notFound } from "next/navigation";
-import DOMPurify from "isomorphic-dompurify";
+import { sanitize } from "@/lib/sanitize";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ResourceAction from "@/components/ResourceAction";
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL_SEO || "https://lennykioko.com";
 
 interface PageProps {
   params: Promise<{
@@ -21,6 +25,44 @@ export async function generateStaticParams() {
     slug,
     category: resourcesData[slug].category,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { category, slug } = await params;
+  const data = resourcesData[slug];
+
+  if (!data) {
+    return {
+      title: "Resource Not Found",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const canonical = `${siteUrl}/resources/${category}/${slug}`;
+  const ogImage = data.image || "/og-image.png";
+  const title = data.title;
+  const description = data.subtitle;
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: "article",
+      url: canonical,
+      title: `${title} | Lenny Kioko`,
+      description,
+      images: [{ url: ogImage, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | Lenny Kioko`,
+      description,
+      images: [ogImage],
+    },
+  };
 }
 
 // Function to check if an item requires contact form (resources with Google Drive links)
@@ -100,7 +142,7 @@ export default async function ResourcePage({ params }: PageProps) {
             <div
               className="prose prose-slate max-w-none text-slate-700 space-y-4"
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(data.description),
+                __html: sanitize(data.description),
               }}
             />
 

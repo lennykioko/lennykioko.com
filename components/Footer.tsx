@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   GrLinkedin,
   GrGithub,
@@ -7,6 +8,14 @@ import {
 } from "react-icons/gr";
 import { SiTelegram } from "react-icons/si";
 import { FaXTwitter, FaTiktok } from "react-icons/fa6";
+
+const internalLinks = [
+  { href: "/", label: "Home" },
+  { href: "/career", label: "Career" },
+  { href: "/trading", label: "Trading" },
+  { href: "/hobbies", label: "Hobbies" },
+  { href: "/blog", label: "Blog" },
+];
 
 const socialLinks = [
   {
@@ -72,7 +81,25 @@ export default function Footer() {
           </p>
         </div>
 
-        <nav className="flex flex-wrap items-center justify-center gap-x-1 sm:gap-y-2">
+        <nav
+          aria-label="Footer navigation"
+          className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-gray-700"
+        >
+          {internalLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="hover:text-amber-500"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+
+        <nav
+          aria-label="Social links"
+          className="flex flex-wrap items-center justify-center gap-x-1 sm:gap-y-2"
+        >
           {socialLinks.map(({ href, icon: Icon, label, color }) => (
             <a
               key={label}

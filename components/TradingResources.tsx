@@ -138,7 +138,7 @@ const resourceSections = [
 export default function TradingResources() {
   return (
     <section className="w-full border-b-2 border-amber-400 bg-slate-100 py-8">
-      <div className="text-center text-2xl font-semibold mb-8">Resources</div>
+      <h2 className="text-center text-2xl font-semibold mb-8">Resources</h2>
       <div className="max-w-7xl mx-auto px-4">
         {resourceSections.map((section, sectionIdx) => (
           <div

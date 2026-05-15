@@ -9,8 +9,9 @@ export default function Jumbotron() {
           <Avatar className="w-48 h-48">
             <AvatarImage
               src="/cityzen.jpg"
-              alt="Profile Photo"
+              alt="Lenny Kioko — Tech Consultant"
               className="object-cover"
+              fetchPriority="high"
             />
             <AvatarFallback className="text-4xl">LK</AvatarFallback>
           </Avatar>
@@ -20,7 +21,7 @@ export default function Jumbotron() {
         <ImQuotesLeft className="mr-3 mb-3 h-6 w-6 self-start text-amber-400" />
         <div className="text-center space-y-2">
           <p>Hi 👋, I am Lenny.</p>
-          <p className="font-semibold">Tech Consultant</p>
+          <h1 className="font-semibold text-xl">Tech Consultant</h1>
           <p className="font-semibold text-base sm:text-xl">
             I help businesses save time &amp; boost revenue using technology
           </p>
