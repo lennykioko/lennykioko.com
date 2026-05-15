@@ -32,6 +32,8 @@ export function sanitize(html: string): string {
   return sanitizeHtml(html, options);
 }
 
+// Escape `<` so `</script>` in a value can't terminate the surrounding
+// JSON-LD <script> tag. JSON parsers still accept <.
 export function jsonLd(obj: unknown): string {
   return JSON.stringify(obj).replace(/</g, "\\u003c");
 }
