@@ -16,6 +16,11 @@ const projects: Project[] = [
     title: "St. Joseph Consecration Tracker",
     url: "https://saintjoseph-33.vercel.app/",
   },
+  {
+    image: "/rosary.png",
+    title: "Holy Rosary Devotion",
+    url: "https://holy-rosary-365.vercel.app/",
+  },
 ];
 
 export default function HobbyProjects() {
