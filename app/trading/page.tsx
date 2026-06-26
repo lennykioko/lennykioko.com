@@ -4,7 +4,6 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Jumbotron from "../../components/Jumbotron";
 import TradingResources from "../../components/TradingResources";
-import Skills from "../../components/Skills";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL_SEO || "https://lennykioko.com";
@@ -45,7 +44,6 @@ export default function Trading() {
       <Header />
       <main className="w-full flex flex-col">
         <Jumbotron />
-        <Skills />
         <TradingResources />
       </main>
       <Disclaimer />

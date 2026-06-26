@@ -12,7 +12,7 @@ const skillCategories = [
   },
   {
     title: "Platforms & Tools",
-    skills: ["TradingView", "MetaTrader 4", "MetaTrader 5", "cTrader", "VsCode"],
+    skills: ["HighLevel", "TradingView", "MetaTrader 4/5", "cTrader", "VsCode"],
   },
   {
     title: "DevOps",

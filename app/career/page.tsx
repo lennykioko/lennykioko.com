@@ -3,7 +3,6 @@ import Experience from "../../components/Experience";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Jumbotron from "../../components/Jumbotron";
-import Skills from "../../components/Skills";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL_SEO || "https://lennykioko.com";
@@ -44,7 +43,6 @@ export default function Career() {
       <Header />
       <main className="w-full flex flex-col">
         <Jumbotron />
-        <Skills />
         <Experience />
       </main>
       <Footer />

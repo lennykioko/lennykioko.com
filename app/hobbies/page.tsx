@@ -3,7 +3,6 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Jumbotron from "../../components/Jumbotron";
 import HobbyProjects from "../../components/HobbyProjects";
-import Skills from "../../components/Skills";
 import Volunteer from "../../components/Volunteer";
 
 const siteUrl =
@@ -45,7 +44,6 @@ export default function Personal() {
       <Header />
       <main className="w-full flex flex-col">
         <Jumbotron />
-        <Skills />
         <Volunteer />
         <HobbyProjects />
       </main>
