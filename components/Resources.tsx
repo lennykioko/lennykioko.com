@@ -7,6 +7,11 @@ const resourceSections = [
     title: "SaaS",
     items: [
       {
+        image: "/certitudeconsultancy.png",
+        title: "Certitude Consultancy",
+        url: "https://www.certitudeconsultancy.agency/",
+      },
+      {
         image: "/KweliVote.png",
         title: "KweliVote",
         url: "https://kwelivote.com",
