@@ -3,8 +3,8 @@ import ProjectCard from "./ProjectCard";
 
 const resourceSections = [
   {
-    id: "SaaS",
-    title: "SaaS",
+    id: "products",
+    title: "Our Products",
     items: [
       {
         image: "/certitudeconsultancy.png",
@@ -23,18 +23,41 @@ const resourceSections = [
       },
     ],
   },
+  {
+    id: "clients",
+    title: "For Clients",
+    items: [
+      {
+        image: "/findAndGet.png",
+        title: "Find & Get",
+        url: "https://findandgetgroup.com",
+      },
+      {
+        image: "/tfpharma.png",
+        title: "TF Pharma",
+        url: "https://www.tfpharmaonline.com/",
+      },
+      {
+        image: "/trfpledge.png",
+        title: "TRF Pledger",
+        url: "https://trfpledge.rotary9216.org/",
+      },
+    ],
+  },
 ];
 
 export default function Resources() {
   return (
     <section className="w-full border-b-2 border-amber-400 bg-slate-100 py-8">
-      <h2 className="text-center text-2xl font-semibold mb-8">Resources</h2>
+      <h2 className="text-center text-2xl font-semibold mb-8">
+        What We&apos;ve Built
+      </h2>
       <div className="max-w-7xl mx-auto px-4">
         {resourceSections.map((section, sectionIdx) => (
           <div
             key={`section-${sectionIdx}`}
             id={section.id}
-            className="mb-12 scroll-mt-24"
+            className="mb-12 scroll-mt-24 last:mb-0"
           >
             <h3 className="text-xl font-semibold text-center mb-6 text-gray-700">
               {section.title}

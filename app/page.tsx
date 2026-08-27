@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Jumbotron from "../components/Jumbotron";
 import Resources from "../components/Resources";
-import Skills from "../components/Skills";
+import Services from "../components/Services";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL_SEO || "https://lennykioko.com";
@@ -18,7 +18,7 @@ export default function Home() {
       <Header />
       <main className="w-full flex flex-col">
         <Jumbotron />
-        <Skills />
+        <Services />
         <Resources />
       </main>
       <Footer />

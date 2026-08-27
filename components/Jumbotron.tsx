@@ -22,8 +22,16 @@ export default function Jumbotron() {
         <div className="text-center space-y-2">
           <p>Hi 👋, I am Lenny.</p>
           <h1 className="font-semibold text-xl">Tech Consultant</h1>
-          <p className="font-semibold text-base sm:text-xl">
-            I help businesses save time &amp; boost revenue using technology
+          <p className="text-lg font-semibold sm:text-2xl">
+            I help businesses{" "}
+            <span className="box-decoration-clone rounded bg-amber-400/70 px-1.5 py-0.5">
+              save time
+            </span>{" "}
+            &amp;{" "}
+            <span className="box-decoration-clone rounded bg-amber-400/70 px-1.5 py-0.5">
+              boost revenue
+            </span>{" "}
+            using technology
           </p>
           <p className="text-gray-600">Ex-Microsoft | Ex-Andela</p>
         </div>
