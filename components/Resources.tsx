@@ -39,8 +39,28 @@ const resourceSections = [
       },
       {
         image: "/trfpledge.png",
-        title: "TRF Pledger",
+        title: "TRF Pledger (D9216)",
         url: "https://trfpledge.rotary9216.org/",
+      },
+      {
+        image: "/pledger9215.png",
+        title: "TRF Pledger (D9215)",
+        url: "https://trfpledge.rotary9215.org/",
+      },
+      {
+        image: "/rotarySyokimau.png",
+        title: "Rotary Club of Syokimau",
+        url: "https://www.rotarysyokimau.org/",
+      },
+      {
+        image: "/eltrich.png",
+        title: "Eltrich Prime",
+        url: "https://www.eltrichprime.com/",
+      },
+      {
+        image: "/ryla.png",
+        title: "RYLA Kenya",
+        url: "https://www.rylakenya.org/",
       },
     ],
   },
