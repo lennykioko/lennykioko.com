@@ -48,6 +48,11 @@ const resourceSections = [
         url: "https://trfpledge.rotary9215.org/",
       },
       {
+        image: "/trfdinner.png",
+        title: "TRF Dinner (D9216)",
+        url: "https://trfdinner.rotary9216.org/",
+      },
+      {
         image: "/rotarySyokimau.png",
         title: "Rotary Club of Syokimau",
         url: "https://www.rotarysyokimau.org/",
